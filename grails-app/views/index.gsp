@@ -51,6 +51,7 @@
             if(!model){
                 Todos.add(new Todo(data));
             }-->
+            window.clusterState = JSON.parse(data);
       });
 
       grailsEvents.on("gorm://afterInsert.com.gajamada.JobState", function(data){
@@ -58,6 +59,7 @@
               if(model){
                   Todos.remove(model);
               }-->
+              window.jobState = JSON.parse(data);
       });
     });
     <script src="/js/toastr.js"></script>
@@ -132,6 +134,7 @@
 			$scope.getJobs();
 			$scope.data = data;
 			$scope.data.jobDetail = null;
+			$scope.jobState = window.jobState;
 		}
 		
 		function ClustersCtrl($scope,$http){
@@ -159,6 +162,7 @@
 				},4000);
 			}
 			$scope.getClusters();
+			$scope.clusterState = window.clusterState;
 		}
 		
 		function JobListCtrl($scope,data){
